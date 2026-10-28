@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import type React from "react";
 import { Literata, Manrope } from "next/font/google";
 import "./globals.css";
 
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
     "Describe the task, answer two or three questions, and book a discovery call for €150.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"

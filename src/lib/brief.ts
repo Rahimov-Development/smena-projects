@@ -24,12 +24,6 @@ export type ClarifySource = "openrouter" | "local";
 const MAX_BRIEF = 4_000;
 const MAX_ANSWER = 2_000;
 
-export function prefersRussian(text: string): boolean {
-  const cyrillic = text.match(/[А-Яа-яЁё]/g)?.length ?? 0;
-  const latin = text.match(/[A-Za-z]/g)?.length ?? 0;
-  return cyrillic > 0 && cyrillic >= latin;
-}
-
 export function cleanBrief(value: unknown): string {
   if (typeof value !== "string") {
     throw new Error("Describe the task before continuing.");
