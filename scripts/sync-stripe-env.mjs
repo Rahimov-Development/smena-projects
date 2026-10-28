@@ -7,7 +7,7 @@ const config = readFileSync(configPath, "utf8");
 
 function readValue(key) {
   const match = config.match(
-    new RegExp(`^${key}\\s*=\\s*['\"]([^'\"]+)['\"]`, "m"),
+    new RegExp(`^${key}\\s*=\\s*['"]([^'"]+)['"]`, "m"),
   );
   return match?.[1] ?? "";
 }

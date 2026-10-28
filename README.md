@@ -38,6 +38,32 @@ OpenRouter (`openrouter/api` in the Projects catalog) is optional. Projects init
 
 The sandbox was created with `stripe sandboxes create` and expires on 4 November 2026 (Europe/Amsterdam).
 
+## Durable preview
+
+This environment has no Vercel token and no Cloudflare API token, so it cannot publish a stable `https://…vercel.app` or `https://….workers.dev` URL. Logged-out `vercel deploy --temporary` and `wrangler deploy --temporary` both expire in about an hour unless Arthur claims them. They are not a substitute for a durable host.
+
+To unblock a permanent preview, either:
+
+- Vercel: run `vercel login`, or create a token at https://vercel.com/account/tokens and set `VERCEL_TOKEN`. Then `vercel deploy --prod` from this repo.
+- Cloudflare: run `wrangler login`, or set `CLOUDFLARE_API_TOKEN` with Workers Scripts edit permission, then deploy.
+
+On the host, set `STRIPE_SECRET_KEY` to the sandbox key only (`rkcs_test_`, `rk_test_`, or `sk_test_`). Set `STRIPE_WEBHOOK_SECRET` when a webhook endpoint exists. Leave `OPENROUTER_API_KEY` empty to keep the local questions. Do not set a live key. Do not commit `.env.local`.
+
+Checkout return URLs follow the public `Host` header, so `NEXT_PUBLIC_APP_URL` can stay as the local default in `.env.example`.
+
+## Checks
+
+```bash
+npm test
+npm run lint
+```
+3. Add the model provider: `stripe projects add openrouter/api --json --yes`
+4. Pull env vars with `stripe projects env` and restart the app
+
+Do not add the Stripe `livemode` service. Checkout is hard-coded to reject keys that are not `sk_test_`, `rk_test_`, or `rkcs_test_`.
+
+The local sandbox was created with `stripe sandboxes create` and expires on 4 November 2026 (Europe/Amsterdam). Claim it before then if you want to keep the test account.
+
 ## Checks
 
 ```bash
