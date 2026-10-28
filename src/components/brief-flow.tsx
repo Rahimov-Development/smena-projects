@@ -261,7 +261,7 @@ export function BriefFlow() {
                 htmlFor="task"
                 className="font-heading text-4xl font-normal tracking-tight sm:text-5xl"
               >
-                опиши задачу
+                Describe the task
               </Label>
               <p className="max-w-xl text-sm leading-6 text-muted-foreground">
                 Write it the way you would tell a colleague. A messy paragraph
@@ -276,13 +276,13 @@ export function BriefFlow() {
               onChange={(event) =>
                 writeDraft({ ...readDraft(), brief: event.target.value })
               }
-              placeholder="Нужен кабинет для клиники: запись, оплаты, напоминания. Сейчас всё в таблице и в WhatsApp, администратор путает слоты."
+              placeholder="We need a booking desk for a clinic: appointments, payments, and reminders. Right now it all lives in a spreadsheet and WhatsApp, and the front desk mixes up the slots."
               className="min-h-48 bg-card px-4 py-3 text-base md:text-base"
             />
             <div className="flex items-center justify-between gap-4">
               <p className="text-xs text-muted-foreground">{sourceLine(state.source)}</p>
               <Button type="submit" size="lg" className="h-11 px-5" disabled={pending}>
-                {pending ? "Reading the brief…" : "Continue"}
+                {pending ? "Reading the brief\u2026" : "Continue"}
               </Button>
             </div>
           </form>
@@ -297,7 +297,7 @@ export function BriefFlow() {
           >
             <div>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                Question {state.phase.index} of 2–3
+                Question {state.phase.index} of 2\u20133
               </p>
               <Label
                 htmlFor="answer"
@@ -319,6 +319,7 @@ export function BriefFlow() {
             <Textarea
               id="answer"
               required
+              placeholder="A sentence is enough."
               value={state.draft}
               onChange={(event) =>
                 writeDraft({ ...readDraft(), draft: event.target.value })
@@ -331,7 +332,7 @@ export function BriefFlow() {
                 Back
               </Button>
               <Button type="submit" size="lg" className="h-11 px-5" disabled={pending}>
-                {pending ? "Next question…" : "Answer"}
+                {pending ? "Next question\u2026" : "Answer"}
               </Button>
             </div>
           </form>
@@ -340,7 +341,7 @@ export function BriefFlow() {
         {state.phase.name === "summary" ? (
           <Card className="bg-card shadow-none">
             <CardHeader>
-              <CardDescription>Discovery call · €150</CardDescription>
+              <CardDescription>Discovery call \u00b7 \u20ac150</CardDescription>
               <CardTitle className="font-heading text-3xl font-normal tracking-tight">
                 {state.phase.summary.title}
               </CardTitle>
@@ -367,7 +368,7 @@ export function BriefFlow() {
                 Back
               </Button>
               <Button type="button" size="lg" className="h-11 px-5" onClick={pay} disabled={pending}>
-                {pending ? "Opening Checkout…" : "Pay Discovery call · €150"}
+                {pending ? "Opening Checkout\u2026" : "Pay Discovery call \u00b7 \u20ac150"}
               </Button>
             </CardFooter>
           </Card>
