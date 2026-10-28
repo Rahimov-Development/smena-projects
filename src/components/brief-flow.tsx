@@ -282,7 +282,7 @@ export function BriefFlow() {
             <div className="flex items-center justify-between gap-4">
               <p className="text-xs text-muted-foreground">{sourceLine(state.source)}</p>
               <Button type="submit" size="lg" className="h-11 px-5" disabled={pending}>
-                {pending ? "Reading the brief\u2026" : "Continue"}
+                {pending ? "Reading the brief…" : "Continue"}
               </Button>
             </div>
           </form>
@@ -297,7 +297,7 @@ export function BriefFlow() {
           >
             <div>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                Question {state.phase.index} of 2\u20133
+                Question {state.phase.index} of 2–3
               </p>
               <Label
                 htmlFor="answer"
@@ -332,7 +332,7 @@ export function BriefFlow() {
                 Back
               </Button>
               <Button type="submit" size="lg" className="h-11 px-5" disabled={pending}>
-                {pending ? "Next question\u2026" : "Answer"}
+                {pending ? "Next question…" : "Answer"}
               </Button>
             </div>
           </form>
@@ -341,7 +341,7 @@ export function BriefFlow() {
         {state.phase.name === "summary" ? (
           <Card className="bg-card shadow-none">
             <CardHeader>
-              <CardDescription>Discovery call \u00b7 \u20ac150</CardDescription>
+              <CardDescription>Discovery call · €150</CardDescription>
               <CardTitle className="font-heading text-3xl font-normal tracking-tight">
                 {state.phase.summary.title}
               </CardTitle>
@@ -368,7 +368,7 @@ export function BriefFlow() {
                 Back
               </Button>
               <Button type="button" size="lg" className="h-11 px-5" onClick={pay} disabled={pending}>
-                {pending ? "Opening Checkout\u2026" : "Pay Discovery call \u00b7 \u20ac150"}
+                {pending ? "Opening Checkout…" : "Pay Discovery call · €150"}
               </Button>
             </CardFooter>
           </Card>
