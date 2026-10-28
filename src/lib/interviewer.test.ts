@@ -5,11 +5,11 @@ import { nextTurn } from "./interviewer";
 const clinic =
   "Нужен кабинет для клиники: запись, оплаты и напоминания. Сейчас всё в таблице.";
 
-test("asks a Russian question for a Russian brief", () => {
+test("asks in English even when the brief is Russian", () => {
   const turn = nextTurn(clinic, []);
   assert.equal(turn.kind, "question");
   if (turn.kind !== "question") return;
-  assert.match(turn.question, /сроку/);
+  assert.match(turn.question, /by when/);
   assert.equal(turn.index, 1);
 });
 
@@ -64,5 +64,5 @@ test("always summarizes after three answers", () => {
   ]);
   assert.equal(turn.kind, "summary");
   if (turn.kind !== "summary") return;
-  assert.match(turn.summary.focus, /мобильное приложение/);
+  assert.match(turn.summary.focus, /Out of scope: Не делаем мобильное приложение/);
 });
