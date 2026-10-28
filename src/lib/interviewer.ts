@@ -1,9 +1,4 @@
-import {
-  type Answer,
-  type ClarifyResult,
-  type Summary,
-  prefersRussian,
-} from "./brief";
+import { type Answer, type ClarifyResult, type Summary } from "./brief";
 
 const TIME =
   /срок|дедлайн|недел|месяц|завтра|сегодня|asap|deadline|week|month|friday|monday|tuesday|wednesday|thursday|saturday|sunday|quarter|q[1-4]\b|20\d{2}/i;
@@ -18,32 +13,18 @@ export function nextTurn(brief: string, answers: Answer[]): ClarifyResult {
 }
 
 export function buildSummary(brief: string, answers: Answer[]): Summary {
-  const ru = prefersRussian(
-    `${brief}\n${answers.map((item) => item.answer).join("\n")}`,
-  );
   const title = firstClause(brief);
-  const goal =
-    answers[0]?.answer ??
-    (ru ? "Результат уточним на звонке." : "We'll pin the outcome on the call.");
-  const context =
-    answers[1]?.answer ??
-    (ru
-      ? "Кто пользуется результатом — разберём на звонке."
-      : "We'll name the user on the call.");
+  const goal = answers[0]?.answer ?? "We'll pin the outcome on the call.";
+  const context = answers[1]?.answer ?? "We'll name the user on the call.";
   const boundary = answers[2]?.answer;
   const focus = boundary
-    ? ru
-      ? `Не входит в задачу: ${boundary}`
-      : `Out of scope: ${boundary}`
-    : ru
-      ? "На звонке зафиксировать первый релиз и что откладываем."
-      : "On the call, lock the first release and what waits.";
+    ? `Out of scope: ${boundary}`
+    : "On the call, lock the first release and what waits.";
 
   return { title, goal, context, focus };
 }
 
 function questionsFor(brief: string): [string, string, string] {
-  const ru = prefersRussian(brief);
   const lower = brief.toLowerCase();
   const site = /сайт|лендинг|магазин|website|landing|storefront|shop/.test(lower);
   const product =
@@ -51,21 +32,6 @@ function questionsFor(brief: string): [string, string, string] {
       lower,
     );
   const design = /дизайн|бренд|фирмен|логотип|ui\b|ux\b|brand/.test(lower);
-
-  if (ru) {
-    const second = site
-      ? "Кто заходит на сайт и какое одно действие он должен закончить?"
-      : product
-        ? "Кто основной пользователь и что он должен сделать без вашей помощи?"
-        : design
-          ? "Где этот дизайн будет жить и какой тон нельзя сбить?"
-          : "Кто принимает решение и что вы уже пробовали?";
-    return [
-      "Что должно быть готово в конце и к какому сроку?",
-      second,
-      "Что точно не входит в задачу?",
-    ];
-  }
 
   const second = site
     ? "Who lands on it, and what should they finish in one visit?"

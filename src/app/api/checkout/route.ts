@@ -7,7 +7,6 @@ import {
   cleanAnswers,
   cleanBrief,
   cleanSummary,
-  prefersRussian,
 } from "@/lib/brief";
 import { getStripe } from "@/lib/stripe";
 import { assertTestCheckoutSession, redactSecrets } from "@/lib/stripe-key";
@@ -45,7 +44,7 @@ export async function POST(request: Request) {
       {
         mode: "payment",
         submit_type: "book",
-        locale: prefersRussian(brief) ? "ru" : "en",
+        locale: "en",
         integration_identifier: INTEGRATION_IDENTIFIER,
         client_reference_id: idempotencyKey.slice(0, 40),
         success_url: `${origin}/booked?session_id={CHECKOUT_SESSION_ID}`,
