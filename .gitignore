@@ -46,16 +46,6 @@ stripe-config.toml
 # vercel
 .vercel
 
-**/.config/stripe/
-.stripe/
-stripe-config.toml
-
-# local fulfillment records
-/data
-
-# vercel
-.vercel
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
