@@ -57,16 +57,3 @@ Checkout return URLs follow the public `Host` header, so `NEXT_PUBLIC_APP_URL` c
 npm test
 npm run lint
 ```
-3. Add the model provider: `stripe projects add openrouter/api --json --yes`
-4. Pull env vars with `stripe projects env` and restart the app
-
-Do not add the Stripe `livemode` service. Checkout is hard-coded to reject keys that are not `sk_test_`, `rk_test_`, or `rkcs_test_`.
-
-The local sandbox was created with `stripe sandboxes create` and expires on 4 November 2026 (Europe/Amsterdam). Claim it before then if you want to keep the test account.
-
-## Checks
-
-```bash
-npm test
-npm run lint
-```
